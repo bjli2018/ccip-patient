@@ -2,10 +2,12 @@ package com.varian.ccip.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Data
-public class Patient {
+public class PatientVO {
     private Integer id;
 
     private String vip;
@@ -58,10 +60,12 @@ public class Patient {
 
     private String createdUser;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date createdDate;
 
     private String lastUpdatedUser;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date lastUpdatedDate;
 
     private Long patientSer;

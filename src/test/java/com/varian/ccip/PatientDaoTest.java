@@ -11,7 +11,7 @@ import com.varian.ccip.model.Patient;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes= {CcipPatientApplication.class})
-public class PatientTest {
+public class PatientDaoTest {
 
     @Autowired
     private PatientMapper patientMapper;
@@ -27,6 +27,7 @@ public class PatientTest {
 	public void testFindByPatientSer() {
 		Patient patient = patientMapper.findByPatientSer(123l);
         System.out.println(patient);
+        System.out.println(patient.getPatientSer());
 	}
 
 }
