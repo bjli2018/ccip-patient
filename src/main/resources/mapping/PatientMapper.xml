@@ -475,4 +475,14 @@
       id1 = #{id1,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="findByPatientSer" resultType="com.varian.ccip.model.Patient" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from patient where 1=1
+    <if test="patientSer != null" >
+      and patient_ser = #{patientSer,jdbcType=VARCHAR}
+    </if>
+  	limit 1
+  </select>
+  
 </mapper>
