@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.varian.ccip.dao.PatientMapper">
+  <resultMap id="BaseResultMap" type="com.varian.ccip.model.Patient">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="vip" jdbcType="VARCHAR" property="vip" />
+    <result column="his_id" jdbcType="VARCHAR" property="hisId" />
+    <result column="v_id" jdbcType="VARCHAR" property="vId" />
+    <result column="pinyin" jdbcType="VARCHAR" property="pinyin" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="contact_name" jdbcType="VARCHAR" property="contactName" />
+    <result column="contact_address" jdbcType="VARCHAR" property="contactAddress" />
+    <result column="contact_home_phone" jdbcType="VARCHAR" property="contactHomePhone" />
+    <result column="contact_work_phone" jdbcType="VARCHAR" property="contactWorkPhone" />
+    <result column="contact_mobile_phone" jdbcType="VARCHAR" property="contactMobilePhone" />
+    <result column="contact_relationship" jdbcType="VARCHAR" property="contactRelationship" />
+    <result column="birth_date" jdbcType="TIMESTAMP" property="birthDate" />
+    <result column="home_phone" jdbcType="VARCHAR" property="homePhone" />
+    <result column="work_phone" jdbcType="VARCHAR" property="workPhone" />
+    <result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone" />
+    <result column="national_id" jdbcType="VARCHAR" property="nationalId" />
+    <result column="chinese_name" jdbcType="VARCHAR" property="chineseName" />
+    <result column="citizenship" jdbcType="VARCHAR" property="citizenship" />
+    <result column="english_name" jdbcType="VARCHAR" property="englishName" />
+    <result column="ethnic_group" jdbcType="VARCHAR" property="ethnicGroup" />
+    <result column="radiation_id" jdbcType="VARCHAR" property="radiationId" />
+    <result column="marital_status" jdbcType="VARCHAR" property="maritalStatus" />
+    <result column="patient_status" jdbcType="VARCHAR" property="patientStatus" />
+    <result column="patient_history" jdbcType="VARCHAR" property="patientHistory" />
+    <result column="created_user" jdbcType="VARCHAR" property="createdUser" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="last_updated_user" jdbcType="VARCHAR" property="lastUpdatedUser" />
+    <result column="last_updated_date" jdbcType="TIMESTAMP" property="lastUpdatedDate" />
+    <result column="patient_ser" jdbcType="BIGINT" property="patientSer" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="id1" jdbcType="VARCHAR" property="id1" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.varian.ccip.model.PatientWithBLOBs">
+    <result column="photo" jdbcType="LONGVARBINARY" property="photo" />
+    <result column="patient_info" jdbcType="LONGVARCHAR" property="patientInfo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, vip, his_id, v_id, pinyin, address, contact_name, contact_address, contact_home_phone, 
+    contact_work_phone, contact_mobile_phone, contact_relationship, birth_date, home_phone, 
+    work_phone, mobile_phone, national_id, chinese_name, citizenship, english_name, ethnic_group, 
+    radiation_id, marital_status, patient_status, patient_history, created_user, created_date, 
+    last_updated_user, last_updated_date, patient_ser, gender, id1
+  </sql>
+  <sql id="Blob_Column_List">
+    photo, patient_info
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from patient
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from patient
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.varian.ccip.model.PatientWithBLOBs">
+    insert into patient (id, vip, his_id, 
+      v_id, pinyin, address, 
+      contact_name, contact_address, contact_home_phone, 
+      contact_work_phone, contact_mobile_phone, contact_relationship, 
+      birth_date, home_phone, work_phone, 
+      mobile_phone, national_id, chinese_name, 
+      citizenship, english_name, ethnic_group, 
+      radiation_id, marital_status, patient_status, 
+      patient_history, created_user, created_date, 
+      last_updated_user, last_updated_date, patient_ser, 
+      gender, id1, photo, 
+      patient_info)
+    values (#{id,jdbcType=INTEGER}, #{vip,jdbcType=VARCHAR}, #{hisId,jdbcType=VARCHAR}, 
+      #{vId,jdbcType=VARCHAR}, #{pinyin,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{contactName,jdbcType=VARCHAR}, #{contactAddress,jdbcType=VARCHAR}, #{contactHomePhone,jdbcType=VARCHAR}, 
+      #{contactWorkPhone,jdbcType=VARCHAR}, #{contactMobilePhone,jdbcType=VARCHAR}, #{contactRelationship,jdbcType=VARCHAR}, 
+      #{birthDate,jdbcType=TIMESTAMP}, #{homePhone,jdbcType=VARCHAR}, #{workPhone,jdbcType=VARCHAR}, 
+      #{mobilePhone,jdbcType=VARCHAR}, #{nationalId,jdbcType=VARCHAR}, #{chineseName,jdbcType=VARCHAR}, 
+      #{citizenship,jdbcType=VARCHAR}, #{englishName,jdbcType=VARCHAR}, #{ethnicGroup,jdbcType=VARCHAR}, 
+      #{radiationId,jdbcType=VARCHAR}, #{maritalStatus,jdbcType=VARCHAR}, #{patientStatus,jdbcType=VARCHAR}, 
+      #{patientHistory,jdbcType=VARCHAR}, #{createdUser,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 
+      #{lastUpdatedUser,jdbcType=VARCHAR}, #{lastUpdatedDate,jdbcType=TIMESTAMP}, #{patientSer,jdbcType=BIGINT}, 
+      #{gender,jdbcType=VARCHAR}, #{id1,jdbcType=VARCHAR}, #{photo,jdbcType=LONGVARBINARY}, 
+      #{patientInfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.varian.ccip.model.PatientWithBLOBs">
+    insert into patient
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="vip != null">
+        vip,
+      </if>
+      <if test="hisId != null">
+        his_id,
+      </if>
+      <if test="vId != null">
+        v_id,
+      </if>
+      <if test="pinyin != null">
+        pinyin,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="contactName != null">
+        contact_name,
+      </if>
+      <if test="contactAddress != null">
+        contact_address,
+      </if>
+      <if test="contactHomePhone != null">
+        contact_home_phone,
+      </if>
+      <if test="contactWorkPhone != null">
+        contact_work_phone,
+      </if>
+      <if test="contactMobilePhone != null">
+        contact_mobile_phone,
+      </if>
+      <if test="contactRelationship != null">
+        contact_relationship,
+      </if>
+      <if test="birthDate != null">
+        birth_date,
+      </if>
+      <if test="homePhone != null">
+        home_phone,
+      </if>
+      <if test="workPhone != null">
+        work_phone,
+      </if>
+      <if test="mobilePhone != null">
+        mobile_phone,
+      </if>
+      <if test="nationalId != null">
+        national_id,
+      </if>
+      <if test="chineseName != null">
+        chinese_name,
+      </if>
+      <if test="citizenship != null">
+        citizenship,
+      </if>
+      <if test="englishName != null">
+        english_name,
+      </if>
+      <if test="ethnicGroup != null">
+        ethnic_group,
+      </if>
+      <if test="radiationId != null">
+        radiation_id,
+      </if>
+      <if test="maritalStatus != null">
+        marital_status,
+      </if>
+      <if test="patientStatus != null">
+        patient_status,
+      </if>
+      <if test="patientHistory != null">
+        patient_history,
+      </if>
+      <if test="createdUser != null">
+        created_user,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="lastUpdatedUser != null">
+        last_updated_user,
+      </if>
+      <if test="lastUpdatedDate != null">
+        last_updated_date,
+      </if>
+      <if test="patientSer != null">
+        patient_ser,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="id1 != null">
+        id1,
+      </if>
+      <if test="photo != null">
+        photo,
+      </if>
+      <if test="patientInfo != null">
+        patient_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="vip != null">
+        #{vip,jdbcType=VARCHAR},
+      </if>
+      <if test="hisId != null">
+        #{hisId,jdbcType=VARCHAR},
+      </if>
+      <if test="vId != null">
+        #{vId,jdbcType=VARCHAR},
+      </if>
+      <if test="pinyin != null">
+        #{pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null">
+        #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactAddress != null">
+        #{contactAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="contactHomePhone != null">
+        #{contactHomePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactWorkPhone != null">
+        #{contactWorkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactMobilePhone != null">
+        #{contactMobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactRelationship != null">
+        #{contactRelationship,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null">
+        #{birthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="homePhone != null">
+        #{homePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="workPhone != null">
+        #{workPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null">
+        #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="nationalId != null">
+        #{nationalId,jdbcType=VARCHAR},
+      </if>
+      <if test="chineseName != null">
+        #{chineseName,jdbcType=VARCHAR},
+      </if>
+      <if test="citizenship != null">
+        #{citizenship,jdbcType=VARCHAR},
+      </if>
+      <if test="englishName != null">
+        #{englishName,jdbcType=VARCHAR},
+      </if>
+      <if test="ethnicGroup != null">
+        #{ethnicGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="radiationId != null">
+        #{radiationId,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalStatus != null">
+        #{maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="patientStatus != null">
+        #{patientStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="patientHistory != null">
+        #{patientHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="createdUser != null">
+        #{createdUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdatedUser != null">
+        #{lastUpdatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null">
+        #{lastUpdatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientSer != null">
+        #{patientSer,jdbcType=BIGINT},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="id1 != null">
+        #{id1,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="patientInfo != null">
+        #{patientInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.varian.ccip.model.PatientWithBLOBs">
+    update patient
+    <set>
+      <if test="vip != null">
+        vip = #{vip,jdbcType=VARCHAR},
+      </if>
+      <if test="hisId != null">
+        his_id = #{hisId,jdbcType=VARCHAR},
+      </if>
+      <if test="vId != null">
+        v_id = #{vId,jdbcType=VARCHAR},
+      </if>
+      <if test="pinyin != null">
+        pinyin = #{pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null">
+        contact_name = #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactAddress != null">
+        contact_address = #{contactAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="contactHomePhone != null">
+        contact_home_phone = #{contactHomePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactWorkPhone != null">
+        contact_work_phone = #{contactWorkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactMobilePhone != null">
+        contact_mobile_phone = #{contactMobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactRelationship != null">
+        contact_relationship = #{contactRelationship,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null">
+        birth_date = #{birthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="homePhone != null">
+        home_phone = #{homePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="workPhone != null">
+        work_phone = #{workPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null">
+        mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="nationalId != null">
+        national_id = #{nationalId,jdbcType=VARCHAR},
+      </if>
+      <if test="chineseName != null">
+        chinese_name = #{chineseName,jdbcType=VARCHAR},
+      </if>
+      <if test="citizenship != null">
+        citizenship = #{citizenship,jdbcType=VARCHAR},
+      </if>
+      <if test="englishName != null">
+        english_name = #{englishName,jdbcType=VARCHAR},
+      </if>
+      <if test="ethnicGroup != null">
+        ethnic_group = #{ethnicGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="radiationId != null">
+        radiation_id = #{radiationId,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalStatus != null">
+        marital_status = #{maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="patientStatus != null">
+        patient_status = #{patientStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="patientHistory != null">
+        patient_history = #{patientHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="createdUser != null">
+        created_user = #{createdUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdatedUser != null">
+        last_updated_user = #{lastUpdatedUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedDate != null">
+        last_updated_date = #{lastUpdatedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientSer != null">
+        patient_ser = #{patientSer,jdbcType=BIGINT},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="id1 != null">
+        id1 = #{id1,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        photo = #{photo,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="patientInfo != null">
+        patient_info = #{patientInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.varian.ccip.model.PatientWithBLOBs">
+    update patient
+    set vip = #{vip,jdbcType=VARCHAR},
+      his_id = #{hisId,jdbcType=VARCHAR},
+      v_id = #{vId,jdbcType=VARCHAR},
+      pinyin = #{pinyin,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      contact_name = #{contactName,jdbcType=VARCHAR},
+      contact_address = #{contactAddress,jdbcType=VARCHAR},
+      contact_home_phone = #{contactHomePhone,jdbcType=VARCHAR},
+      contact_work_phone = #{contactWorkPhone,jdbcType=VARCHAR},
+      contact_mobile_phone = #{contactMobilePhone,jdbcType=VARCHAR},
+      contact_relationship = #{contactRelationship,jdbcType=VARCHAR},
+      birth_date = #{birthDate,jdbcType=TIMESTAMP},
+      home_phone = #{homePhone,jdbcType=VARCHAR},
+      work_phone = #{workPhone,jdbcType=VARCHAR},
+      mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      national_id = #{nationalId,jdbcType=VARCHAR},
+      chinese_name = #{chineseName,jdbcType=VARCHAR},
+      citizenship = #{citizenship,jdbcType=VARCHAR},
+      english_name = #{englishName,jdbcType=VARCHAR},
+      ethnic_group = #{ethnicGroup,jdbcType=VARCHAR},
+      radiation_id = #{radiationId,jdbcType=VARCHAR},
+      marital_status = #{maritalStatus,jdbcType=VARCHAR},
+      patient_status = #{patientStatus,jdbcType=VARCHAR},
+      patient_history = #{patientHistory,jdbcType=VARCHAR},
+      created_user = #{createdUser,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updated_user = #{lastUpdatedUser,jdbcType=VARCHAR},
+      last_updated_date = #{lastUpdatedDate,jdbcType=TIMESTAMP},
+      patient_ser = #{patientSer,jdbcType=BIGINT},
+      gender = #{gender,jdbcType=VARCHAR},
+      id1 = #{id1,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=LONGVARBINARY},
+      patient_info = #{patientInfo,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.varian.ccip.model.Patient">
+    update patient
+    set vip = #{vip,jdbcType=VARCHAR},
+      his_id = #{hisId,jdbcType=VARCHAR},
+      v_id = #{vId,jdbcType=VARCHAR},
+      pinyin = #{pinyin,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      contact_name = #{contactName,jdbcType=VARCHAR},
+      contact_address = #{contactAddress,jdbcType=VARCHAR},
+      contact_home_phone = #{contactHomePhone,jdbcType=VARCHAR},
+      contact_work_phone = #{contactWorkPhone,jdbcType=VARCHAR},
+      contact_mobile_phone = #{contactMobilePhone,jdbcType=VARCHAR},
+      contact_relationship = #{contactRelationship,jdbcType=VARCHAR},
+      birth_date = #{birthDate,jdbcType=TIMESTAMP},
+      home_phone = #{homePhone,jdbcType=VARCHAR},
+      work_phone = #{workPhone,jdbcType=VARCHAR},
+      mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      national_id = #{nationalId,jdbcType=VARCHAR},
+      chinese_name = #{chineseName,jdbcType=VARCHAR},
+      citizenship = #{citizenship,jdbcType=VARCHAR},
+      english_name = #{englishName,jdbcType=VARCHAR},
+      ethnic_group = #{ethnicGroup,jdbcType=VARCHAR},
+      radiation_id = #{radiationId,jdbcType=VARCHAR},
+      marital_status = #{maritalStatus,jdbcType=VARCHAR},
+      patient_status = #{patientStatus,jdbcType=VARCHAR},
+      patient_history = #{patientHistory,jdbcType=VARCHAR},
+      created_user = #{createdUser,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      last_updated_user = #{lastUpdatedUser,jdbcType=VARCHAR},
+      last_updated_date = #{lastUpdatedDate,jdbcType=TIMESTAMP},
+      patient_ser = #{patientSer,jdbcType=BIGINT},
+      gender = #{gender,jdbcType=VARCHAR},
+      id1 = #{id1,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
