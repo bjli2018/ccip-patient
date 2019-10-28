@@ -19,13 +19,13 @@ public class PatientTest {
 	
 	@Test
 	public void testSelectByPrimaryKey() {
-		Patient patient = patientMapper.selectByPrimaryKey(2);
+		Patient patient = patientMapper.selectByPrimaryKey(1);
         System.out.println(patient);
 	}
     
 	@Test
 	public void testFindByPatientSer() {
-		Patient patient = patientMapper.findByPatientSer(456l);
+		Patient patient = patientMapper.findByPatientSer(123l);
         System.out.println(patient);
 	}
 
