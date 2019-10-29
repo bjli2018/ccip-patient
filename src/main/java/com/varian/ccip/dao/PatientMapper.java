@@ -3,20 +3,19 @@ package com.varian.ccip.dao;
 import org.apache.ibatis.annotations.Param;
 
 import com.varian.ccip.model.Patient;
-import com.varian.ccip.model.PatientWithBLOBs;
 
 public interface PatientMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(PatientWithBLOBs record);
+    int insert(Patient record);
 
-    int insertSelective(PatientWithBLOBs record);
+    int insertSelective(Patient record);
 
-    PatientWithBLOBs selectByPrimaryKey(Integer id);
+    Patient selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(PatientWithBLOBs record);
+    int updateByPrimaryKeySelective(Patient record);
 
-    int updateByPrimaryKeyWithBLOBs(PatientWithBLOBs record);
+    int updateByPrimaryKeyWithBLOBs(Patient record);
 
     int updateByPrimaryKey(Patient record);
     

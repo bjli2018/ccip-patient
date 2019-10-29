@@ -73,4 +73,6 @@ public class PatientVO {
     private String gender;
 
     private String id1;
+    
+    private String patientInfo;
 }

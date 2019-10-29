@@ -35,8 +35,7 @@
     <result column="gender" jdbcType="VARCHAR" property="gender" />
     <result column="id1" jdbcType="VARCHAR" property="id1" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.varian.ccip.model.PatientWithBLOBs">
-    <result column="photo" jdbcType="LONGVARBINARY" property="photo" />
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.varian.ccip.model.Patient">
     <result column="patient_info" jdbcType="LONGVARCHAR" property="patientInfo" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -47,7 +46,7 @@
     last_updated_user, last_updated_date, patient_ser, gender, id1
   </sql>
   <sql id="Blob_Column_List">
-    photo, patient_info
+    patient_info
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
@@ -61,7 +60,7 @@
     delete from patient
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.varian.ccip.model.PatientWithBLOBs">
+  <insert id="insert" parameterType="com.varian.ccip.model.Patient">
     insert into patient (id, vip, his_id, 
       v_id, pinyin, address, 
       contact_name, contact_address, contact_home_phone, 
@@ -72,8 +71,8 @@
       radiation_id, marital_status, patient_status, 
       patient_history, created_user, created_date, 
       last_updated_user, last_updated_date, patient_ser, 
-      gender, id1, photo, 
-      patient_info)
+      gender, id1, patient_info
+      )
     values (#{id,jdbcType=INTEGER}, #{vip,jdbcType=VARCHAR}, #{hisId,jdbcType=VARCHAR}, 
       #{vId,jdbcType=VARCHAR}, #{pinyin,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{contactName,jdbcType=VARCHAR}, #{contactAddress,jdbcType=VARCHAR}, #{contactHomePhone,jdbcType=VARCHAR}, 
@@ -84,10 +83,10 @@
       #{radiationId,jdbcType=VARCHAR}, #{maritalStatus,jdbcType=VARCHAR}, #{patientStatus,jdbcType=VARCHAR}, 
       #{patientHistory,jdbcType=VARCHAR}, #{createdUser,jdbcType=VARCHAR}, #{createdDate,jdbcType=TIMESTAMP}, 
       #{lastUpdatedUser,jdbcType=VARCHAR}, #{lastUpdatedDate,jdbcType=TIMESTAMP}, #{patientSer,jdbcType=BIGINT}, 
-      #{gender,jdbcType=VARCHAR}, #{id1,jdbcType=VARCHAR}, #{photo,jdbcType=LONGVARBINARY}, 
-      #{patientInfo,jdbcType=LONGVARCHAR})
+      #{gender,jdbcType=VARCHAR}, #{id1,jdbcType=VARCHAR}, #{patientInfo,jdbcType=LONGVARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.varian.ccip.model.PatientWithBLOBs">
+  <insert id="insertSelective" parameterType="com.varian.ccip.model.Patient">
     insert into patient
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -185,9 +184,6 @@
       </if>
       <if test="id1 != null">
         id1,
-      </if>
-      <if test="photo != null">
-        photo,
       </if>
       <if test="patientInfo != null">
         patient_info,
@@ -290,15 +286,12 @@
       <if test="id1 != null">
         #{id1,jdbcType=VARCHAR},
       </if>
-      <if test="photo != null">
-        #{photo,jdbcType=LONGVARBINARY},
-      </if>
       <if test="patientInfo != null">
         #{patientInfo,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.varian.ccip.model.PatientWithBLOBs">
+  <update id="updateByPrimaryKeySelective" parameterType="com.varian.ccip.model.Patient">
     update patient
     <set>
       <if test="vip != null">
@@ -394,16 +387,13 @@
       <if test="id1 != null">
         id1 = #{id1,jdbcType=VARCHAR},
       </if>
-      <if test="photo != null">
-        photo = #{photo,jdbcType=LONGVARBINARY},
-      </if>
       <if test="patientInfo != null">
         patient_info = #{patientInfo,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.varian.ccip.model.PatientWithBLOBs">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.varian.ccip.model.Patient">
     update patient
     set vip = #{vip,jdbcType=VARCHAR},
       his_id = #{hisId,jdbcType=VARCHAR},
@@ -436,7 +426,6 @@
       patient_ser = #{patientSer,jdbcType=BIGINT},
       gender = #{gender,jdbcType=VARCHAR},
       id1 = #{id1,jdbcType=VARCHAR},
-      photo = #{photo,jdbcType=LONGVARBINARY},
       patient_info = #{patientInfo,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -484,5 +473,4 @@
     </if>
   	limit 1
   </select>
-  
 </mapper>
