@@ -19,7 +19,7 @@ public class PatientController {
     @Autowired
     private ServerConfig serverConfig;
 	
-	@GetMapping("search")
+    @GetMapping("search")
 	@ResponseBody
 	public PatientVO findByPatientSer(@RequestParam("patientSer")Long patientSer) {
 		return this.patientService.findByPatientSer(patientSer);
