@@ -2,12 +2,22 @@ spring:
   application:
     name: ccip-patient
   datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/ccip_patient?serverTimezone=GMT%2B8
     username: root
     password: admin
+    filters: log4j,wall,mergeStat
+  main:
+    allow-bean-definition-overriding: true
+    
 server: 
   port: 8071
+
+mybatis-plus:
+  mapper-locations: classpath*:com/varian/ccip/**/xml/*Mapper.xml
+  global-config:
+    id-type: 0  #0:数据库ID自增   1:用户输入id  2:全局唯一id(IdWorker)  3:全局唯一ID(uuid)
+    db-column-underline: false
+    refresh-mapper: true
 
 eureka: 
   client:
