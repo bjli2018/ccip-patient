@@ -10,4 +10,7 @@
         <result column="status" property="status" />
         <result column="used" property="used" />
     </resultMap>
+    <select id="getPatientIdentifiers" resultMap = "BaseResultMap">
+    	select * from patient_identifier
+    </select>
 </mapper>

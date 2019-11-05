@@ -1,5 +1,7 @@
 package com.varian.ccip;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +54,17 @@ public class PatientIdentifierDaoTest {
 	public void testDeletePatientIdentifier() {
 		int isSuccess = patientIdentifierMapper.deleteById(1);
         System.out.println("isSuccess=" + (isSuccess==1?true:false));
+	}
+	
+	@Test
+	public void testSelectList() {
+		List<PatientIdentifier> list = patientIdentifierMapper.selectList(null);
+		list.forEach(System.out::println);
+	}
+	
+	@Test
+	public void testGetPatientIdentifiers() {
+		List<PatientIdentifier> list = patientIdentifierMapper.getPatientIdentifiers();
+		list.forEach(System.out::println);
 	}
 }

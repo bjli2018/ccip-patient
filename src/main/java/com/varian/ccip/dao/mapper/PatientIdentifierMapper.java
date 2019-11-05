@@ -1,6 +1,9 @@
 package com.varian.ccip.dao.mapper;
 
 import com.varian.ccip.dao.entity.PatientIdentifier;
+
+import java.util.List;
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -12,5 +15,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2019-11-05
  */
 public interface PatientIdentifierMapper extends BaseMapper<PatientIdentifier> {
-
+	List<PatientIdentifier> getPatientIdentifiers();
 }
