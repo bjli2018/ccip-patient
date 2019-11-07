@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author bob
- * @since 2019-11-05
+ * @since 2019-11-07
  */
 public interface PatientIdentifierMapper extends BaseMapper<PatientIdentifier> {
 	List<PatientIdentifier> getPatientIdentifiers();

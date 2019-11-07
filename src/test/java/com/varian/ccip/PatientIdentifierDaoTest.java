@@ -33,7 +33,7 @@ public class PatientIdentifierDaoTest {
 	@Test
 	public void testUpdatePatientIdentifier() {
 		PatientIdentifier entity = new PatientIdentifier();
-		entity.setId(1);
+		entity.setId(3);
 		entity.setValue("look very good!!!");
 		int isSuccess = patientIdentifierMapper.updateById(entity);
         System.out.println("isSuccess=" + (isSuccess==1?true:false));
@@ -52,7 +52,7 @@ public class PatientIdentifierDaoTest {
 	
 	@Test
 	public void testDeletePatientIdentifier() {
-		int isSuccess = patientIdentifierMapper.deleteById(1);
+		int isSuccess = patientIdentifierMapper.deleteById(3);
         System.out.println("isSuccess=" + (isSuccess==1?true:false));
 	}
 	
